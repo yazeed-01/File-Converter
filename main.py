@@ -3,16 +3,10 @@ from pdf2docx import parse
 from docx2pdf import convert
 
 def convert_file(file_path):
-    """
-    Converts the specified file based on its extension:
-    - Word (.docx, .doc) to PDF
-    - PDF (.pdf) to Word (using pdf2docx)
-    """
 
     filename, file_extension = os.path.splitext(file_path)
 
-    if file_extension.lower() in (".docx", ".doc"):
-        # Convert Word to PDF
+    if file_extension.lower() in (".docx", ".doc"): # Convert Word to PDF
         output_file_path = f"{filename}.pdf"
         try:
             convert(file_path, output_file_path)
@@ -21,8 +15,7 @@ def convert_file(file_path):
         except Exception as e:
             print(f"Error converting Word to PDF: {e}")
 
-    elif file_extension.lower() == ".pdf":
-        # Convert PDF to Word using pdf2docx
+    elif file_extension.lower() == ".pdf":  # Convert PDF to Word using pdf2docx
         output_file_path = f"{filename}.docx"
         try:
             parse(pdf_file=file_path, docx_with_path=output_file_path)
@@ -35,9 +28,6 @@ def convert_file(file_path):
         print(f"Unsupported file type: {file_extension}")
 
 def open_file_explorer(file_path):
-    """
-    Opens File Explorer at the specified file's location (cross-platform approach).
-    """
 
     directory = os.path.dirname(file_path)  # Get the directory containing the file
     if os.name == 'nt':  # Windows
